@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ObsidianPro — Katalog Produk Digital, Software & Aksesoris Eksklusif</title>
+  <meta name="description" content="Toko resmi ObsidianPro. Dapatkan software AI, aset digital premium, dan produk fisik pilihan dengan checkout instan." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            obsidian: {
+              950: '#06040e',
+              900: '#0b0818',
+              850: '#100b24',
+              800: '#171033',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #06040e;
+      color: #f8fafc;
+      overflow-x: hidden;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .obsidian-grid {
+      background-image:
+        linear-gradient(to right, rgba(168, 85, 247, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(168, 85, 247, 0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .glass-card {
+      background: rgba(16, 11, 36, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Mencegah auto-zoom di iOS / In-App Browser Instagram & TikTok saat mengetik */
+    @media screen and (max-width: 768px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+    }
+    .drawer-height {
+      height: 100vh;
+      height: 100dvh;
+    }
+    .safe-pb {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+    .safe-pt {
+      padding-top: max(0.75rem, env(safe-area-inset-top));
+    }
+  </style>
+</head>
+<body class="obsidian-grid antialiased selection:bg-purple-600 selection:text-white">
+
+  <!-- Top Promo Banner -->
+  <div class="bg-gradient-to-r from-purple-900 via-fuchsia-800 to-purple-900 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium border-b border-purple-400/20 safe-pt">
+    <span>Promo Spesial Hari Ini: Gunakan kode </span>
+    <button onclick="copyPromoCode()" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/35 border border-white/25 font-bold tracking-wider hover:bg-black/50 transition">
+      <span id="top-promo-code">OBSIDIAN20</span>
+      <span class="text-[10px] opacity-80">(Salin)</span>
+    </button>
+    <span> untuk Diskon 20%!</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 glass-card border-b border-purple-500/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-purple-600/30 font-extrabold text-white text-lg">
+          O
+        </div>
+        <div>
+          <span id="nav-brand-name" class="font-extrabold text-lg tracking-tight text-white">ObsidianPro</span>
+          <span class="hidden sm:inline-block ml-1.5 text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30">Official</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="#katalog" class="hover:text-purple-300 transition">Katalog Produk</a>
+        <a href="#keunggulan" class="hover:text-purple-300 transition">Keunggulan</a>
+        <a href="#faq" class="hover:text-purple-300 transition">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <button
+          onclick="toggleCart(true)"
+          aria-label="Buka Keranjang"
+          class="relative min-h-[42px] px-3.5 sm:px-4 rounded-xl bg-purple-600/20 hover:bg-purple-600/35 border border-purple-400/35 text-white font-semibold text-sm flex items-center gap-2 transition active:scale-95"
+        >
+          <svg class="w-5 h-5 text-purple-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span class="hidden sm:inline">Keranjang</span>
+          <span id="nav-cart-badge" class="min-w-[22px] h-[22px] px-1.5 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white text-xs font-extrabold flex items-center justify-center">
+            0
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-10 pb-14 sm:pt-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[540px] h-[340px] bg-purple-600/25 blur-[130px] rounded-full pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-400/30 text-xs sm:text-sm font-semibold text-purple-200 mb-5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Produk Digital Instan & Pengiriman Fisik Seluruh Indonesia</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+        Solusi Digital & Gear Premium dalam
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-300">
+          Satu Ekosistem
+        </span>
+      </h1>
+
+      <p class="mt-4 sm:mt-5 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Tingkatkan produktivitas kerja dan karya kreatif Anda dengan koleksi software, template eksklusif, serta perangkat fisik pilihan berkualitas tinggi.
+      </p>
+
+      <div class="mt-7 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a
+          href="#katalog"
+          class="w-full sm:w-auto min-h-[48px] px-7 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl shadow-purple-700/35 transition active:scale-95"
+        >
+          <span>Jelajahi Katalog Sekarang</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        <button
+          onclick="openDirectWhatsApp()"
+          class="w-full sm:w-auto min-h-[48px] px-6 rounded-2xl glass-card hover:border-purple-400/50 text-purple-200 font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition"
+        >
+          <span>Konsultasi via WhatsApp</span>
+        </button>
+      </div>
+
+      <!-- Trust Metrics -->
+      <div class="mt-10 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-6 max-w-2xl mx-auto pt-8 border-t border-purple-500/15">
+        <div>
+          <div class="text-xl sm:text-3xl font-extrabold text-white">2.400+</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Pesanan Sukses</div>
+        </div>
+        <div>
+          <div class="text-xl sm:text-3xl font-extrabold text-fuchsia-300">4.9/5.0</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Rating Pembeli</div>
+        </div>
+        <div>
+          <div class="text-xl sm:text-3xl font-extrabold text-purple-300">Instan</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Akses File & Lisensi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Katalog Produk Section -->
+  <section id="katalog" class="py-10 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto scroll-mt-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-fuchsia-400">Katalog Resmi</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Pilih Produk Kebutuhan Anda</h2>
+      </div>
+
+      <!-- Horizontal Swipeable Filter Pills (Nyaman di HP) -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <button
+          onclick="setFilter('all')"
+          data-filter="all"
+          class="filter-btn shrink-0 min-h-[40px] px-4 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-md shadow-purple-700/30 transition"
+        >
+          Semua Produk
+        </button>
+        <button
+          onclick="setFilter('digital')"
+          data-filter="digital"
+          class="filter-btn shrink-0 min-h-[40px] px-4 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition"
+        >
+          Digital & Software
+        </button>
+        <button
+          onclick="setFilter('physical')"
+          data-filter="physical"
+          class="filter-btn shrink-0 min-h-[40px] px-4 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition"
+        >
+          Produk Fisik
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+  </section>
+
+  <!-- Keunggulan Section -->
+  <section id="keunggulan" class="py-12 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-purple-500/25">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Kenapa Belanja di <span class="text-purple-400">ObsidianPro</span>?</h2>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2">Sistem transaksi transparan untuk barang digital maupun fisik dalam satu keranjang.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div class="p-5 rounded-2xl bg-[#0b071a]/90 border border-purple-500/15">
+          <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-300 flex items-center justify-center font-bold mb-3">01</div>
+          <h3 class="font-bold text-white text-base">Checkout Gabungan</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Beli software dan barang fisik bersamaan. Ongkir otomatis Rp 0 jika keranjang hanya berisi produk digital.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0b071a]/90 border border-purple-500/15">
+          <div class="w-10 h-10 rounded-xl bg-fuchsia-600/20 text-fuchsia-300 flex items-center justify-center font-bold mb-3">02</div>
+          <h3 class="font-bold text-white text-base">Pembayaran Lengkap</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Mendukung QRIS semua e-wallet & m-banking, transfer bank BCA, Mandiri, BNI, BRI, hingga konfirmasi WA.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0b071a]/90 border border-purple-500/15">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-300 flex items-center justify-center font-bold mb-3">03</div>
+          <h3 class="font-bold text-white text-base">Lisensi & Garansi Resmi</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Setiap software dilengkapi panduan instalasi lengkap dan produk fisik bergaransi tukar baru jika cacat.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#0b071a]/90 border border-purple-500/15">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-300 flex items-center justify-center font-bold mb-3">04</div>
+          <h3 class="font-bold text-white text-base">Gratis Ongkir Otomatis</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Belanja produk fisik minimal Rp 1.000.000 otomatis mendapat bebas biaya pengiriman ke seluruh Indonesia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-10 sm:py-14 px-4 sm:px-6 max-w-3xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-white text-center mb-6">Pertanyaan Umum (FAQ)</h2>
+    <div class="space-y-3" id="faq-list">
+      <details class="glass-card rounded-2xl p-4 sm:p-5 group" open>
+        <summary class="font-bold text-sm sm:text-base text-white cursor-pointer flex items-center justify-between list-none">
+          <span>Bagaimana cara menerima produk digital / software setelah bayar?</span>
+          <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">
+          Setelah melakukan pembayaran via QRIS atau Transfer Bank, klik tombol <strong>Konfirmasi ke WhatsApp</strong> pada halaman invoice. Link unduhan, akses cloud, dan serial key akan langsung dikirimkan ke email & WhatsApp Anda dalam hitungan menit.
+        </p>
+      </details>
+
+      <details class="glass-card rounded-2xl p-4 sm:p-5 group">
+        <summary class="font-bold text-sm sm:text-base text-white cursor-pointer flex items-center justify-between list-none">
+          <span>Berapa lama pengiriman untuk produk fisik?</span>
+          <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">
+          Pesanan produk fisik yang dikonfirmasi sebelum pukul 15.00 WIB akan dikirim di hari yang sama menggunakan ekspedisi pilihan Anda (J&T, JNE, atau SiCepat) lengkap dengan nomor resi pelacakan.
+        </p>
+      </details>
+
+      <details class="glass-card rounded-2xl p-4 sm:p-5 group">
+        <summary class="font-bold text-sm sm:text-base text-white cursor-pointer flex items-center justify-between list-none">
+          <span>Apakah ada diskon untuk pembelian lebih dari satu item?</span>
+          <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">
+          Ya! Anda dapat memasukkan kode promo <strong class="text-fuchsia-300">OBSIDIAN20</strong> di dalam keranjang belanja untuk mendapatkan potongan harga langsung sebesar 20% untuk seluruh total belanja Anda.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-purple-500/20 bg-[#04030a] py-10 px-4 sm:px-6 text-center text-xs text-slate-400 pb-28 sm:pb-12">
+    <div class="max-w-5xl mx-auto space-y-2">
+      <div class="font-extrabold text-base text-white">ObsidianPro Official Store</div>
+      <p>Solusi Produk Digital, Software Kreatif & Gear Fisik Berkualitas.</p>
+      <p class="text-slate-500 pt-2">© 2026 ObsidianPro. Hak Cipta Dilindungi Undang-Undang.</p>
+    </div>
+  </footer>
+
+  <!-- Sticky Floating Bottom Cart Bar (Khusus Mobile / In-App Browser HP) -->
+  <div
+    id="mobile-sticky-cart"
+    class="fixed bottom-0 inset-x-0 z-40 sm:hidden hidden bg-[#0d081f]/95 backdrop-blur-xl border-t border-purple-500/35 px-4 pt-3 safe-pb shadow-[0_-10px_30px_rgba(0,0,0,0.75)]"
+  >
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <div class="text-[11px] text-purple-300 font-medium">
+          <span id="mobile-bar-count">0</span> item di keranjang
+        </div>
+        <div id="mobile-bar-total" class="text-base font-extrabold text-white">Rp 0</div>
+      </div>
+      <button
+        onclick="toggleCart(true)"
+        class="min-h-[46px] px-5 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-bold text-sm shadow-lg shadow-purple-700/40 active:scale-95 transition"
+      >
+        Lihat Keranjang →
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Detail Produk (Bottom Sheet di HP, Centered Modal di Desktop) -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden">
+    <div onclick="closeProductDetail()" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+    <div class="relative z-10 h-full flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="w-full max-w-xl max-h-[90dvh] bg-[#0e0a1f] border-t sm:border border-purple-500/35 rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-purple-500/20">
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-300">Detail & Spesifikasi</span>
+          <button onclick="closeProductDetail()" class="w-9 h-9 rounded-xl bg-purple-950/80 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+        </div>
+        <div id="detail-modal-body" class="p-5 overflow-y-auto space-y-4"></div>
+        <div id="detail-modal-footer" class="p-4 border-t border-purple-500/20 bg-[#090616] safe-pb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+    <aside class="relative z-10 ml-auto w-full max-w-md drawer-height bg-[#0b0719] border-l border-purple-500/30 flex flex-col shadow-2xl">
+      <!-- Drawer Header -->
+      <div class="px-5 py-4 border-b border-purple-500/20 flex items-center justify-between safe-pt">
+        <div class="flex items-center gap-2">
+          <h3 class="font-extrabold text-lg text-white">Keranjang Belanja</h3>
+          <span id="drawer-cart-count" class="px-2 py-0.5 rounded-full text-xs font-bold bg-purple-600/30 text-purple-200">0</span>
+        </div>
+        <button onclick="toggleCart(false)" class="w-9 h-9 rounded-xl bg-purple-950/80 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3"></div>
+
+      <!-- Promo & Summary Footer -->
+      <div id="cart-footer" class="p-4 sm:p-5 border-t border-purple-500/20 bg-[#080512] space-y-3.5 safe-pb">
+        <!-- Kode Promo -->
+        <div class="flex gap-2">
+          <input
+            id="promo-input"
+            type="text"
+            placeholder="Kode promo (cth: OBSIDIAN20)"
+            class="flex-1 min-h-[42px] px-3.5 rounded-xl bg-[#130d29] border border-purple-500/25 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-purple-400"
+          />
+          <button
+            onclick="applyPromo()"
+            class="min-h-[42px] px-4 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-400/35 text-purple-200 font-bold text-xs transition"
+          >
+            Pakai
+          </button>
+        </div>
+        <div id="promo-feedback" class="text-xs hidden"></div>
+
+        <!-- Ringkasan Harga -->
+        <div class="space-y-1.5 text-xs sm:text-sm pt-1">
+          <div class="flex justify-between text-slate-300">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">Rp 0</span>
+          </div>
+          <div id="cart-discount-row" class="hidden justify-between text-emerald-400 font-medium">
+            <span>Diskon Promo</span>
+            <span id="cart-discount">-Rp 0</span>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span id="cart-shipping-label">Ongkos Kirim</span>
+            <span id="cart-shipping">Rp 0</span>
+          </div>
+          <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-purple-500/20">
+            <span>Total Bayar</span>
+            <span id="cart-total" class="text-fuchsia-300">Rp 0</span>
+          </div>
+        </div>
+
+        <button
+          id="checkout-btn"
+          onclick="openCheckoutModal()"
+          class="w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-700/35 transition active:scale-95 disabled:opacity-40 disabled:pointer-events-none"
+        >
+          Lanjut ke Pembayaran →
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Multi-Step Checkout & Payment Modal -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden">
+    <div onclick="closeCheckoutModal()" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+    <div class="relative z-10 h-full flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="w-full max-w-xl max-h-[92dvh] bg-[#0e0a1f] border-t sm:border border-purple-500/35 rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+        <!-- Header -->
+        <div class="px-5 py-4 border-b border-purple-500/20 flex items-center justify-between">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-white" id="checkout-step-title">Langkah 1: Data Pembeli</h3>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span id="step-dot-1" class="h-1.5 w-8 rounded-full bg-fuchsia-500"></span>
+              <span id="step-dot-2" class="h-1.5 w-8 rounded-full bg-purple-900"></span>
+              <span id="step-dot-3" class="h-1.5 w-8 rounded-full bg-purple-900"></span>
+            </div>
+          </div>
+          <button onclick="closeCheckoutModal()" class="w-9 h-9 rounded-xl bg-purple-950/80 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+        </div>
+
+        <!-- Body -->
+        <div id="checkout-body" class="p-5 overflow-y-auto space-y-4 flex-1"></div>
+
+        <!-- Footer -->
+        <div id="checkout-footer" class="p-4 border-t border-purple-500/20 bg-[#090616] safe-pb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] hidden px-4 py-2.5 rounded-xl bg-purple-950/95 border border-purple-400/40 text-white text-xs sm:text-sm font-semibold shadow-xl"></div>
+
+  <script>
+    // =========================================================================
+    // 1. KONFIGURASI TOKO, GAMBAR QRIS, WHATSAPP & REKENING (EDIT DI SINI)
+    // =========================================================================
+    const STORE_CONFIG = {
+      brandName: "ObsidianPro",
+      whatsappNumber: "6281234567890", // Ganti dengan nomor WA Anda (awali 62 tanpa +)
+      qrisImage: "qris-toko.jpg", // Nama file gambar QRIS asli yang diunggah ke GitHub
+      qrisMerchantName: "OBSIDIAN PRO STORE",
+      promoCode: "OBSIDIAN20",
+      promoDiscountPercent: 20,
+      freeShippingThreshold: 1000000, // Gratis ongkir fisik jika belanja >= Rp 1.000.000
+      flatShippingCost: 25000, // Ongkir flat Rp 25.000 jika ada produk fisik
+      bankAccounts: {
+        bca: { label: "BCA Virtual / Transfer", number: "1234567890", holder: "A/N OBSIDIAN PRO" },
+        mandiri: { label: "Mandiri Transfer", number: "0987654321000", holder: "A/N OBSIDIAN PRO" },
+        bni: { label: "BNI Transfer", number: "1122334455", holder: "A/N OBSIDIAN PRO" },
+        bri: { label: "BRI Transfer", number: "554433221100999", holder: "A/N OBSIDIAN PRO" }
+      }
+    };
+
+    // =========================================================================
+    // 2. DAFTAR BARANG DIGITAL & FISIK (GANTI NAMA FILE GAMBAR & HARGA DI SINI)
+    // =========================================================================
+    const PRODUCTS = [
+      {
+        id: "prod-1",
+        name: "ObsidianAI Content Suite Pro",
+        category: "digital", // "digital" (tanpa ongkir) atau "physical" (hitung ongkir)
+        badge: "TERLARIS",
+        price: 299000,
+        originalPrice: 599000,
+        rating: 4.9,
+        sold: 842,
+        stockLabel: "Lisensi Lifetime",
+        image: "produk-1.jpg", // Unggah file produk-1.jpg ke GitHub Anda
+        shortDesc: "Software otomasi riset konten, skrip video pendek, dan manajemen aset kreatif berbasis AI.",
+        fullDesc: "Paket software all-in-one untuk kreator dan agensi digital. Mendukung ekspor multi-format, template prompt terstruktur, dan pembaruan fitur seumur hidup tanpa biaya bulanan.",
+        specs: [
+          "Platform: Windows, macOS & Web Cloud",
+          "Lisensi: Aktivasi 2 Perangkat (Lifetime)",
+          "Bonus: 150+ Preset & Panduan Video HD"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#c026d3"/></linearGradient></defs><rect width="200" height="200" fill="#110c24"/><circle cx="100" cy="100" r="55" fill="url(#g1)" opacity="0.25"/><rect x="55" y="60" width="90" height="80" rx="14" fill="#1e163b" stroke="#a855f7" stroke-width="2.5"/><path d="M80 95 L95 110 L122 83" stroke="#e879f9" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`
+      },
+      {
+        id: "prod-2",
+        name: "Creator Motion & LUTs Pack Vol. 4",
+        category: "digital",
+        badge: "INSTAN DOWNLOAD",
+        price: 149000,
+        originalPrice: 280000,
+        rating: 4.9,
+        sold: 619,
+        stockLabel: "Akses Cloud",
+        image: "produk-2.jpg",
+        shortDesc: "Koleksi 120+ transisi sinematik, efek suara SFX, dan color grading LUTs 4K untuk editing cepat.",
+        fullDesc: "Kompatibel dengan Premiere Pro, CapCut Desktop, DaVinci Resolve, dan After Effects. Tinggal drag-and-drop untuk menghasilkan visual kelas studio.",
+        specs: [
+          "Resolusi: Hingga 4K 60fps",
+          "Kompatibilitas: CapCut, Premiere, DaVinci, AE",
+          "Ukuran Paket: 4.8 GB via Google Drive Cepat"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><rect width="200" height="200" fill="#110c24"/><polygon points="82,68 135,100 82,132" fill="#c026d3" opacity="0.85"/><circle cx="100" cy="100" r="58" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="10 6"/></svg>`
+      },
+      {
+        id: "prod-3",
+        name: "Notion Business & Finance OS",
+        category: "digital",
+        badge: "HEMAT",
+        price: 99000,
+        originalPrice: 199000,
+        rating: 4.8,
+        sold: 510,
+        stockLabel: "Template Siap Pakai",
+        image: "produk-3.jpg",
+        shortDesc: "Sistem manajemen keuangan bisnis, kalender konten, dan pelacak KPI dalam satu dashboard rapi.",
+        fullDesc: "Dirancang untuk UMKM, freelancer, dan kreator agar arus kas, jadwal produksi, serta database klien tertata otomatis tanpa rumus rumit.",
+        specs: [
+          "Versi: Mendukung Akun Notion Gratis",
+          "Fitur: Auto-kalkulasi Laba/Rugi & Tracker Proyek",
+          "Panduan: Tutorial Bahasa Indonesia Lengkap"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><rect width="200" height="200" fill="#110c24"/><rect x="48" y="52" width="104" height="96" rx="12" fill="#1e163b" stroke="#8b5cf6" stroke-width="2.5"/><line x1="65" y1="80" x2="135" y2="80" stroke="#e879f9" stroke-width="3"/><line x1="65" y1="102" x2="120" y2="102" stroke="#a855f7" stroke-width="3"/><line x1="65" y1="124" x2="105" y2="124" stroke="#6366f1" stroke-width="3"/></svg>`
+      },
+      {
+        id: "prod-4",
+        name: "Obsidian Desk Mat Micro-Weave",
+        category: "physical",
+        badge: "STOK TERBATAS",
+        price: 245000,
+        originalPrice: 320000,
+        rating: 4.9,
+        sold: 315,
+        stockLabel: "Tersisa 18 pcs",
+        image: "produk-4.jpg",
+        shortDesc: "Alas meja ukuran 90x40cm anti-air dengan permukaan presisi tinggi dan jahitan tepi ungu obsidian.",
+        fullDesc: "Dirancang khusus untuk setup meja kerja modern. Permukaan micro-weave halus untuk akurasi sensor mouse, dasar karet alami anti-selip, serta lapisan tahan tumpahan cairan.",
+        specs: [
+          "Dimensi: 900mm x 400mm x 4mm",
+          "Material: Micro-Weave Waterproof + Natural Rubber",
+          "Kelengkapan: Desk Mat + Pouch Penyimpanan"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><rect width="200" height="200" fill="#110c24"/><rect x="28" y="65" width="144" height="70" rx="10" fill="#1e163b" stroke="#9333ea" stroke-width="2.5"/><line x1="42" y1="120" x2="158" y2="120" stroke="#c084fc" stroke-width="2" stroke-dasharray="6 4"/></svg>`
+      },
+      {
+        id: "prod-5",
+        name: "Obsidian RGB Studio Light Bar",
+        category: "physical",
+        badge: "BEST GEAR",
+        price: 420000,
+        originalPrice: 550000,
+        rating: 4.9,
+        sold: 228,
+        stockLabel: "Tersisa 11 unit",
+        image: "produk-5.jpg",
+        shortDesc: "Lampu monitor & ambient studio dengan kontrol suhu warna (2900K-6500K) + mode RGB Obsidian.",
+        fullDesc: "Mengurangi pantulan layar sekaligus memberikan pencahayaan latar belakang ungu-magenta sinematik untuk rekaman video, live streaming, maupun kerja malam.",
+        specs: [
+          "Daya: USB Type-C 5V/2A (Termasuk Kabel 1.5m)",
+          "CRI: Ra > 95 (Warna Akurat untuk Kamera)",
+          "Kontrol: Wireless Dial Controller"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><rect width="200" height="200" fill="#110c24"/><rect x="35" y="88" width="130" height="16" rx="8" fill="#a855f7"/><polygon points="45,104 155,104 175,155 25,155" fill="#c026d3" opacity="0.22"/></svg>`
+      },
+      {
+        id: "prod-6",
+        name: "Obsidian Mechanical Keycap Set",
+        category: "physical",
+        badge: "EDISI KHUSUS",
+        price: 365000,
+        originalPrice: 450000,
+        rating: 4.8,
+        sold: 174,
+        stockLabel: "Tersisa 9 set",
+        image: "produk-6.jpg",
+        shortDesc: "Set 135 tombol PBT Double-Shot profil Cherry bertema hitam obsidian dengan aksen ungu neon.",
+        fullDesc: "Tahan kilap dan tidak pudar meski dipakai mengetik bertahun-tahun. Cocok untuk keyboard mekanikal layout 60%, 65%, 75%, TKL, hingga Full-Size.",
+        specs: [
+          "Material: PBT Double-Shot Ketebalan 1.5mm",
+          "Jumlah Tombol: 135 Keys (Kompatibel Switch MX)",
+          "Bonus: Keycap Puller Kawat + Box Eksklusif"
+        ],
+        svg: `<svg viewBox="0 0 200 200" class="w-full h-full"><rect width="200" height="200" fill="#110c24"/><rect x="52" y="56" width="42" height="42" rx="8" fill="#1e163b" stroke="#a855f7" stroke-width="2.5"/><rect x="106" y="56" width="42" height="42" rx="8" fill="#7c3aed"/><rect x="52" y="108" width="96" height="38" rx="8" fill="#1e163b" stroke="#c026d3" stroke-width="2.5"/></svg>`
+      }
+    ];
+
+    // =========================================================================
+    // 3. STATE APLIKASI & KERANJANG
+    // =========================================================================
+    let currentFilter = "all";
+    let cart = JSON.parse(localStorage.getItem("obsidian_cart_v1") || "[]");
+    let appliedPromo = false;
+    let checkoutData = {
+      name: "",
+      whatsapp: "",
+      email: "",
+      address: "",
+      courier: "J&T Express (Reguler)",
+      paymentMethod: "qris",
+      bankCode: "bca",
+      invoiceId: ""
+    };
+
+    function formatRupiah(num) {
+      return "Rp " + Number(num || 0).toLocaleString("id-ID");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.remove("hidden");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.add("hidden"), 2600);
+    }
+
+    function saveCart() {
+      localStorage.setItem("obsidian_cart_v1", JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function copyPromoCode() {
+      navigator.clipboard?.writeText(STORE_CONFIG.promoCode);
+      showToast(`Kode promo ${STORE_CONFIG.promoCode} berhasil disalin!`);
+    }
+
+    function copyText(text, label = "Teks") {
+      navigator.clipboard?.writeText(text);
+      showToast(`${label} berhasil disalin!`);
+    }
+
+    function openDirectWhatsApp() {
+      const msg = encodeURIComponent(`Halo ${STORE_CONFIG.brandName}, saya ingin bertanya mengenai produk di katalog.`);
+      window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${msg}`, "_blank");
+    }
+
+    // =========================================================================
+    // 4. RENDER KATALOG PRODUK (MENDUKUNG GAMBAR ASLI GITHUB + FALLBACK SVG)
+    // =========================================================================
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        const active = btn.dataset.filter === filter;
+        btn.className = active
+          ? "filter-btn shrink-0 min-h-[40px] px-4 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-md shadow-purple-700/30 transition"
+          : "filter-btn shrink-0 min-h-[40px] px-4 rounded-xl text-xs sm:text-sm font-semibold glass-card text-slate-300 hover:text-white transition";
+      });
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("product-grid");
+      const filtered = currentFilter === "all"
+        ? PRODUCTS
+        : PRODUCTS.filter(p => p.category === currentFilter);
+
+      grid.innerHTML = filtered.map(p => {
+        const isDigital = p.category === "digital";
+        const discountBadge = p.originalPrice
+          ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)
+          : 0;
+
+        const mediaHtml = p.image
+          ? `<img
+               src="${p.image}"
+               alt="${p.name}"
+               loading="lazy"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+               class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+             />
+             <div style="display:none" class="w-full h-full items-center justify-center p-4">${p.svg || ""}</div>`
+          : `<div class="w-full h-full flex items-center justify-center p-4">${p.svg || ""}</div>`;
+
+        return `
+          <article class="group relative rounded-2xl bg-[#0e0a1f]/90 border border-purple-500/20 hover:border-purple-400/50 overflow-hidden flex flex-col transition-all duration-300 shadow-lg shadow-purple-950/30">
+            <div class="relative aspect-[4/3] w-full bg-[#140e2b] overflow-hidden cursor-pointer" onclick="openProductDetail('${p.id}')">
+              ${mediaHtml}
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0e0a1f] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide backdrop-blur-md ${
+                  isDigital
+                    ? "bg-fuchsia-500/20 text-fuchsia-200 border border-fuchsia-400/30"
+                    : "bg-indigo-500/20 text-indigo-200 border border-indigo-400/30"
+                }">
+                  ${isDigital ? "Digital / Software" : "Produk Fisik"}
+                </span>
+                ${p.badge ? `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-600/90 text-white shadow">${p.badge}</span>` : ""}
+              </div>
+
+              ${discountBadge > 0 ? `
+                <span class="absolute top-3 right-3 px-2 py-0.5 rounded-lg text-xs font-bold bg-emerald-500/90 text-slate-950">
+                  -${discountBadge}%
+                </span>
+              ` : ""}
+            </div>
+
+            <div class="p-4 sm:p-5 flex-1 flex flex-col">
+              <div class="flex items-center justify-between text-xs text-purple-300/80 mb-1.5">
+                <span class="flex items-center gap-1">
+                  <span class="text-amber-400">★</span> ${p.rating} (${p.sold} terjual)
+                </span>
+                <span class="text-purple-300/70">${p.stockLabel}</span>
+              </div>
+
+              <h3 onclick="openProductDetail('${p.id}')" class="text-base sm:text-lg font-bold text-white group-hover:text-purple-300 transition-colors cursor-pointer line-clamp-1">
+                ${p.name}
+              </h3>
+
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-300/80 line-clamp-2 flex-1">
+                ${p.shortDesc}
+              </p>
+
+              <div class="mt-4 pt-3.5 border-t border-purple-500/15 flex items-end justify-between gap-2">
+                <div>
+                  ${p.originalPrice ? `<div class="text-xs text-slate-400 line-through">${formatRupiah(p.originalPrice)}</div>` : ""}
+                  <div class="text-lg sm:text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-fuchsia-300">
+                    ${formatRupiah(p.price)}
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onclick="openProductDetail('${p.id}')"
+                    class="min-h-[42px] px-3 rounded-xl text-xs font-semibold text-purple-200 bg-purple-950/60 hover:bg-purple-900/70 border border-purple-500/30 transition"
+                  >
+                    Detail
+                  </button>
+                  <button
+                    type="button"
+                    onclick="addToCart('${p.id}')"
+                    class="min-h-[42px] px-3.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 shadow-md shadow-purple-700/30 active:scale-95 transition"
+                  >
+                    + Keranjang
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    // =========================================================================
+    // 5. MODAL DETAIL & SPESIFIKASI PRODUK
+    // =========================================================================
+    function openProductDetail(productId) {
+      const p = PRODUCTS.find(item => item.id === productId);
+      if (!p) return;
+
+      const mediaHtml = p.image
+        ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover" />
+           <div style="display:none" class="w-full h-full items-center justify-center p-6">${p.svg || ""}</div>`
+        : `<div class="w-full h-full flex items-center justify-center p-6">${p.svg || ""}</div>`;
+
+      document.getElementById("detail-modal-body").innerHTML = `
+        <div class="aspect-video w-full rounded-2xl bg-[#140e2b] overflow-hidden border border-purple-500/20">
+          ${mediaHtml}
+        </div>
+        <div class="flex items-center justify-between gap-2 pt-1">
+          <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${
+            p.category === "digital"
+              ? "bg-fuchsia-500/20 text-fuchsia-200 border border-fuchsia-400/30"
+              : "bg-indigo-500/20 text-indigo-200 border border-indigo-400/30"
+          }">
+            ${p.category === "digital" ? "Produk Digital / Software" : "Produk Fisik (Kirim Kurir)"}
+          </span>
+          <span class="text-xs text-amber-400 font-semibold">★ ${p.rating} • ${p.sold} Terjual</span>
+        </div>
+        <div>
+          <h3 class="text-xl font-extrabold text-white">${p.name}</h3>
+          <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">${p.fullDesc}</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[#140e2b] border border-purple-500/20 space-y-2">
+          <div class="text-xs font-bold uppercase tracking-wider text-purple-300">Spesifikasi & Kelengkapan</div>
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-200">
+            ${p.specs.map(s => `<li class="flex items-start gap-2"><span class="text-fuchsia-400">✓</span><span>${s}</span></li>`).join("")}
+          </ul>
+        </div>
+      `;
+
+      document.getElementById("detail-modal-footer").innerHTML = `
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            ${p.originalPrice ? `<div class="text-xs text-slate-400 line-through">${formatRupiah(p.originalPrice)}</div>` : ""}
+            <div class="text-xl font-extrabold text-fuchsia-300">${formatRupiah(p.price)}</div>
+          </div>
+          <button
+            onclick="addToCart('${p.id}'); closeProductDetail(); toggleCart(true);"
+            class="min-h-[46px] px-6 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-bold text-sm shadow-lg shadow-purple-700/35 active:scale-95 transition"
+          >
+            Beli Sekarang
+          </button>
+        </div>
+      `;
+
+      document.getElementById("detail-modal").classList.remove("hidden");
+    }
+
+    function closeProductDetail() {
+      document.getElementById("detail-modal").classList.add("hidden");
+    }
+
+    // =========================================================================
+    // 6. LOGIKA KERANJANG, KALKULASI ONGKIR & PROMO
+    // =========================================================================
+    function addToCart(productId) {
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: productId, qty: 1 });
+      }
+      saveCart();
+      const prod = PRODUCTS.find(p => p.id === productId);
+      showToast(`"${prod.name}" ditambahkan ke keranjang`);
+    }
+
+    function updateQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      saveCart();
+    }
+
+    function toggleCart(open) {
+      const drawer = document.getElementById("cart-drawer");
+      if (open) {
+        drawer.classList.remove("hidden");
+        updateCartUI();
+      } else {
+        drawer.classList.add("hidden");
+      }
+    }
+
+    function applyPromo() {
+      const input = document.getElementById("promo-input").value.trim().toUpperCase();
+      const feedback = document.getElementById("promo-feedback");
+      feedback.classList.remove("hidden");
+
+      if (input === STORE_CONFIG.promoCode) {
+        appliedPromo = true;
+        feedback.className = "text-xs text-emerald-400 font-semibold";
+        feedback.textContent = `✓ Kode ${STORE_CONFIG.promoCode} aktif! Diskon ${STORE_CONFIG.promoDiscountPercent}% diterapkan.`;
+      } else {
+        appliedPromo = false;
+        feedback.className = "text-xs text-rose-400";
+        feedback.textContent = `Kode tidak valid. Coba masukkan: ${STORE_CONFIG.promoCode}`;
+      }
+      updateCartUI();
+    }
+
+    function getCartSummary() {
+      let subtotal = 0;
+      let totalItems = 0;
+      let hasPhysical = false;
+
+      const detailedItems = cart.map(entry => {
+        const prod = PRODUCTS.find(p => p.id === entry.id);
+        if (!prod) return null;
+        subtotal += prod.price * entry.qty;
+        totalItems += entry.qty;
+        if (prod.category === "physical") hasPhysical = true;
+        return { ...prod, qty: entry.qty, lineTotal: prod.price * entry.qty };
+      }).filter(Boolean);
+
+      const discount = appliedPromo
+        ? Math.round(subtotal * (STORE_CONFIG.promoDiscountPercent / 100))
+        : 0;
+
+      const afterDiscount = subtotal - discount;
+
+      let shipping = 0;
+      let shippingNote = "Gratis (Produk Digital)";
+      if (hasPhysical) {
+        if (afterDiscount >= STORE_CONFIG.freeShippingThreshold) {
+          shipping = 0;
+          shippingNote = "Gratis Ongkir (Min. 1 Juta)";
+        } else {
+          shipping = STORE_CONFIG.flatShippingCost;
+          shippingNote = "Reguler Seluruh Indonesia";
+        }
+      }
+
+      const total = afterDiscount + shipping;
+      return { detailedItems, totalItems, subtotal, discount, shipping, shippingNote, hasPhysical, total };
+    }
+
+    function updateCartUI() {
+      const summary = getCartSummary();
+
+      // Update badges & mobile sticky bar
+      document.getElementById("nav-cart-badge").textContent = summary.totalItems;
+      document.getElementById("drawer-cart-count").textContent = summary.totalItems;
+
+      const mobileBar = document.getElementById("mobile-sticky-cart");
+      if (summary.totalItems > 0) {
+        mobileBar.classList.remove("hidden");
+        document.getElementById("mobile-bar-count").textContent = summary.totalItems;
+        document.getElementById("mobile-bar-total").textContent = formatRupiah(summary.total);
+      } else {
+        mobileBar.classList.add("hidden");
+      }
+
+      // Render items inside drawer
+      const container = document.getElementById("cart-items-container");
+      const checkoutBtn = document.getElementById("checkout-btn");
+
+      if (summary.detailedItems.length === 0) {
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center py-12 px-4">
+            <div class="w-16 h-16 rounded-2xl bg-purple-950/70 border border-purple-500/25 flex items-center justify-center text-2xl mb-3">🛒</div>
+            <div class="font-bold text-white text-base">Keranjang Masih Kosong</div>
+            <p class="text-xs text-slate-400 mt-1 max-w-xs">Pilih produk digital atau fisik dari katalog untuk mulai berbelanja.</p>
+            <button onclick="toggleCart(false)" class="mt-4 min-h-[42px] px-5 rounded-xl bg-purple-600/30 border border-purple-400/35 text-xs font-bold text-purple-200">
+              Lihat Katalog
+            </button>
+          </div>
+        `;
+        checkoutBtn.disabled = true;
+      } else {
+        checkoutBtn.disabled = false;
+        container.innerHTML = summary.detailedItems.map(item => `
+          <div class="p-3.5 rounded-2xl bg-[#140e2b] border border-purple-500/20 flex gap-3 items-center">
+            <div class="w-16 h-16 rounded-xl bg-[#0b0719] overflow-hidden shrink-0 border border-purple-500/15">
+              ${item.image
+                ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover" />
+                   <div style="display:none" class="w-full h-full items-center justify-center p-1">${item.svg || ""}</div>`
+                : `<div class="w-full h-full flex items-center justify-center p-1">${item.svg || ""}</div>`
+              }
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[10px] font-semibold uppercase tracking-wider ${item.category === "digital" ? "text-fuchsia-400" : "text-indigo-400"}">
+                ${item.category === "digital" ? "Digital / Software" : "Produk Fisik"}
+              </div>
+              <div class="text-sm font-bold text-white truncate">${item.name}</div>
+              <div class="text-xs font-extrabold text-purple-200 mt-0.5">${formatRupiah(item.lineTotal)}</div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-[#0b0719] p-1 rounded-xl border border-purple-500/20">
+              <button onclick="updateQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-purple-950/80 text-white font-bold text-sm flex items-center justify-center">−</button>
+              <span class="w-6 text-center text-xs font-bold text-white">${item.qty}</span>
+              <button onclick="updateQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-purple-600 text-white font-bold text-sm flex items-center justify-center">+</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      document.getElementById("cart-subtotal").textContent = formatRupiah(summary.subtotal);
+      const discRow = document.getElementById("cart-discount-row");
+      if (summary.discount > 0) {
+        discRow.classList.remove("hidden");
+        discRow.classList.add("flex");
+        document.getElementById("cart-discount").textContent = "-" + formatRupiah(summary.discount);
+      } else {
+        discRow.classList.add("hidden");
+        discRow.classList.remove("flex");
+      }
+      document.getElementById("cart-shipping-label").textContent = `Ongkir (${summary.shippingNote})`;
+      document.getElementById("cart-shipping").textContent = summary.shipping === 0 ? "Rp 0 (Gratis)" : formatRupiah(summary.shipping);
+      document.getElementById("cart-total").textContent = formatRupiah(summary.total);
+    }
+
+    // =========================================================================
+    // 7. MULTI-STEP CHECKOUT & PEMBAYARAN QRIS ASLI DARI GITHUB
+    // =========================================================================
+    function openCheckoutModal() {
+      toggleCart(false);
+      document.getElementById("checkout-modal").classList.remove("hidden");
+      renderCheckoutStep(1);
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkout-modal").classList.add("hidden");
+    }
+
+    function updateStepIndicator(step) {
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById(`step-dot-${i}`);
+        dot.className = i <= step
+          ? "h-1.5 w-8 rounded-full bg-fuchsia-500 transition-all"
+          : "h-1.5 w-8 rounded-full bg-purple-900 transition-all";
+      }
+    }
+
+    function renderCheckoutStep(step) {
+      const summary = getCartSummary();
+      const title = document.getElementById("checkout-step-title");
+      const body = document.getElementById("checkout-body");
+      const footer = document.getElementById("checkout-footer");
+      updateStepIndicator(step);
+
+      if (step === 1) {
+        title.textContent = "Langkah 1: Data Pembeli & Pengiriman";
+        body.innerHTML = `
+          <div class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-semibold text-purple-200 mb-1">Nama Lengkap *</label>
+              <input id="chk-name" type="text" value="${checkoutData.name}" placeholder="Masukkan nama lengkap Anda" class="w-full min-h-[44px] px-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-fuchsia-400" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-purple-200 mb-1">Nomor WhatsApp *</label>
+                <input id="chk-wa" type="tel" value="${checkoutData.whatsapp}" placeholder="0812xxxxxxxx" class="w-full min-h-[44px] px-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-fuchsia-400" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-purple-200 mb-1">Email (Untuk Akses Digital) *</label>
+                <input id="chk-email" type="email" value="${checkoutData.email}" placeholder="nama@email.com" class="w-full min-h-[44px] px-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-fuchsia-400" />
+              </div>
+            </div>
+
+            ${summary.hasPhysical ? `
+              <div class="pt-2 border-t border-purple-500/20 space-y-3">
+                <div class="text-xs font-bold text-indigo-300">Detail Pengiriman Produk Fisik</div>
+                <div>
+                  <label class="block text-xs font-semibold text-purple-200 mb-1">Alamat Lengkap + Kecamatan & Kode Pos *</label>
+                  <textarea id="chk-address" rows="2" placeholder="Jl. Contoh No. 12, Kec. ..., Kota ..." class="w-full p-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-fuchsia-400">${checkoutData.address}</textarea>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-purple-200 mb-1">Pilih Kurir Pengiriman</label>
+                  <select id="chk-courier" class="w-full min-h-[44px] px-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm focus:outline-none focus:border-fuchsia-400">
+                    <option value="J&T Express (Reguler)" ${checkoutData.courier === "J&T Express (Reguler)" ? "selected" : ""}>J&T Express (Reguler 2-3 Hari)</option>
+                    <option value="JNE Reguler" ${checkoutData.courier === "JNE Reguler" ? "selected" : ""}>JNE Reguler (2-4 Hari)</option>
+                    <option value="SiCepat BEST / Reguler" ${checkoutData.courier === "SiCepat BEST / Reguler" ? "selected" : ""}>SiCepat Reguler</option>
+                  </select>
+                </div>
+              </div>
+            ` : `
+              <div class="p-3.5 rounded-xl bg-fuchsia-500/10 border border-fuchsia-400/25 text-xs text-fuchsia-200">
+                ⚡ Keranjang Anda hanya berisi <strong>Produk Digital/Software</strong>. Tidak memerlukan alamat pengiriman fisik.
+              </div>
+            `}
+          </div>
+        `;
+
+        footer.innerHTML = `
+          <button onclick="submitStep1()" class="w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-bold text-sm shadow-lg shadow-purple-700/35 active:scale-95 transition">
+            Pilih Metode Pembayaran →
+          </button>
+        `;
+      } else if (step === 2) {
+        title.textContent = "Langkah 2: Metode Pembayaran";
+        body.innerHTML = `
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-2xl bg-[#140e2b] border border-purple-500/20 flex justify-between items-center">
+              <span class="text-xs text-slate-300">Total Tagihan (${summary.totalItems} item)</span>
+              <span class="text-lg font-extrabold text-fuchsia-300">${formatRupiah(summary.total)}</span>
+            </div>
+
+            <div class="space-y-2.5">
+              <label class="flex items-center justify-between p-3.5 rounded-2xl bg-[#140e2b] border ${checkoutData.paymentMethod === "qris" ? "border-fuchsia-500 bg-purple-900/20" : "border-purple-500/20"} cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payMethod" value="qris" ${checkoutData.paymentMethod === "qris" ? "checked" : ""} onchange="selectPayMethod('qris')" class="accent-fuchsia-500 w-4 h-4" />
+                  <div>
+                    <div class="text-sm font-bold text-white">QRIS Instan (Scan / Simpan Gambar)</div>
+                    <div class="text-[11px] text-slate-400">GoPay, OVO, DANA, ShopeePay, BCA, Mandiri, BRI, dll.</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">CEPAT</span>
+              </label>
+
+              <label class="flex items-center justify-between p-3.5 rounded-2xl bg-[#140e2b] border ${checkoutData.paymentMethod === "bank" ? "border-fuchsia-500 bg-purple-900/20" : "border-purple-500/20"} cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payMethod" value="bank" ${checkoutData.paymentMethod === "bank" ? "checked" : ""} onchange="selectPayMethod('bank')" class="accent-fuchsia-500 w-4 h-4" />
+                  <div>
+                    <div class="text-sm font-bold text-white">Transfer Bank (BCA / Mandiri / BNI / BRI)</div>
+                    <div class="text-[11px] text-slate-400">Transfer manual atau m-Banking ke rekening resmi</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            ${checkoutData.paymentMethod === "bank" ? `
+              <div class="pt-1">
+                <label class="block text-xs font-semibold text-purple-200 mb-1.5">Pilih Bank Tujuan:</label>
+                <select id="chk-bank" onchange="checkoutData.bankCode = this.value" class="w-full min-h-[44px] px-3.5 rounded-xl bg-[#140e2b] border border-purple-500/30 text-white text-sm">
+                  ${Object.entries(STORE_CONFIG.bankAccounts).map(([code, info]) => `
+                    <option value="${code}" ${checkoutData.bankCode === code ? "selected" : ""}>${info.label}</option>
+                  `).join("")}
+                </select>
+              </div>
+            ` : ""}
+          </div>
+        `;
+
+        footer.innerHTML = `
+          <div class="flex gap-2.5">
+            <button onclick="renderCheckoutStep(1)" class="min-h-[48px] px-4 rounded-2xl bg-purple-950/70 border border-purple-500/30 text-purple-200 font-semibold text-sm">
+              ← Kembali
+            </button>
+            <button onclick="generateInvoice()" class="flex-1 min-h-[48px] rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-bold text-sm shadow-lg shadow-purple-700/35 active:scale-95 transition">
+              Buat Invoice Pembayaran
+            </button>
+          </div>
+        `;
+      } else if (step === 3) {
+        title.textContent = "Langkah 3: Selesaikan Pembayaran";
+        const bankInfo = STORE_CONFIG.bankAccounts[checkoutData.bankCode];
+
+        const paymentInstructionHtml = checkoutData.paymentMethod === "qris"
+          ? `
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#130d29] border border-purple-500/30 text-center space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-400/30 text-xs font-semibold text-purple-200">
+                <span>QRIS Instan • Semua E-Wallet & M-Banking</span>
+              </div>
+
+              <div class="text-xs text-slate-300">
+                Merchant: <strong class="text-white">${STORE_CONFIG.qrisMerchantName}</strong>
+              </div>
+
+              <div class="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 rounded-2xl bg-white p-3 shadow-xl shadow-purple-950/50 flex items-center justify-center overflow-hidden">
+                <img
+                  src="${STORE_CONFIG.qrisImage}"
+                  alt="Kode QRIS Pembayaran ${STORE_CONFIG.brandName}"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                  class="w-full h-full object-contain"
+                />
+                <div style="display:none" class="w-full h-full flex-col items-center justify-center text-slate-700 text-xs p-3 text-center">
+                  <p class="font-bold text-slate-900 mb-1">File "${STORE_CONFIG.qrisImage}" Belum Ditemukan</p>
+                  <p>Unggah foto QRIS resmi Anda ke repositori GitHub dengan nama file tersebut.</p>
+                </div>
+              </div>
+
+              <div>
+                <div class="text-xs text-slate-400">Nominal Transfer Tepat:</div>
+                <div class="text-xl font-extrabold text-fuchsia-300">${formatRupiah(summary.total)}</div>
+              </div>
+
+              <div class="pt-1 flex justify-center">
+                <a
+                  href="${STORE_CONFIG.qrisImage}"
+                  download="QRIS-${STORE_CONFIG.brandName}.jpg"
+                  class="inline-flex items-center justify-center min-h-[42px] px-4 rounded-xl text-xs font-semibold bg-purple-600/25 hover:bg-purple-600/40 text-purple-200 border border-purple-400/30 transition"
+                >
+                  Simpan Gambar QRIS ke Galeri
+                </a>
+              </div>
+            </div>
+          `
+          : `
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#130d29] border border-purple-500/30 space-y-3">
+              <div class="text-xs font-semibold text-purple-300">${bankInfo.label}</div>
+              <div class="flex items-center justify-between gap-2 p-3 rounded-xl bg-[#0a0717] border border-purple-500/25">
+                <div>
+                  <div class="text-lg font-extrabold tracking-wider text-white">${bankInfo.number}</div>
+                  <div class="text-xs text-slate-400">${bankInfo.holder}</div>
+                </div>
+                <button onclick="copyText('${bankInfo.number}', 'Nomor Rekening')" class="min-h-[38px] px-3 rounded-lg bg-purple-600/30 text-purple-200 text-xs font-bold border border-purple-400/30">
+                  Salin
+                </button>
+              </div>
+              <div class="flex items-center justify-between text-xs pt-1">
+                <span class="text-slate-400">Total Transfer:</span>
+                <span class="text-lg font-extrabold text-fuchsia-300">${formatRupiah(summary.total)}</span>
+              </div>
+            </div>
+          `;
+
+        body.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex items-center justify-between text-xs px-3.5 py-2.5 rounded-xl bg-purple-950/50 border border-purple-500/20">
+              <span class="text-slate-300">No. Invoice: <strong class="text-white">${checkoutData.invoiceId}</strong></span>
+              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">Menunggu Bayar</span>
+            </div>
+
+            ${paymentInstructionHtml}
+
+            <div class="p-3.5 rounded-xl bg-[#140e2b] border border-purple-500/20 text-xs text-slate-300 space-y-1">
+              <div><strong>Pemesan:</strong> ${checkoutData.name} (${checkoutData.whatsapp})</div>
+              <div><strong>Email Akses:</strong> ${checkoutData.email}</div>
+              ${summary.hasPhysical ? `<div><strong>Alamat (${checkoutData.courier}):</strong> ${checkoutData.address}</div>` : ""}
+            </div>
+          </div>
+        `;
+
+        footer.innerHTML = `
+          <div class="space-y-2">
+            <button
+              onclick="confirmOrderToWhatsApp()"
+              class="w-full min-h-[48px] rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-sm shadow-lg shadow-emerald-700/30 active:scale-95 transition flex items-center justify-center gap-2"
+            >
+              <span>Sudah Bayar? Konfirmasi ke WhatsApp →</span>
+            </button>
+            <button onclick="renderCheckoutStep(2)" class="w-full py-2 text-xs text-slate-400 hover:text-white">
+              Ganti Metode Pembayaran
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function submitStep1() {
+      const summary = getCartSummary();
+      const name = document.getElementById("chk-name").value.trim();
+      const wa = document.getElementById("chk-wa").value.trim();
+      const email = document.getElementById("chk-email").value.trim();
+
+      if (!name || !wa || !email) {
+        showToast("Harap lengkapi Nama, WhatsApp, dan Email Anda.");
+        return;
+      }
+
+      checkoutData.name = name;
+      checkoutData.whatsapp = wa;
+      checkoutData.email = email;
+
+      if (summary.hasPhysical) {
+        const addr = document.getElementById("chk-address").value.trim();
+        const courier = document.getElementById("chk-courier").value;
+        if (!addr) {
+          showToast("Harap isi alamat lengkap untuk pengiriman produk fisik.");
+          return;
+        }
+        checkoutData.address = addr;
+        checkoutData.courier = courier;
+      }
+
+      renderCheckoutStep(2);
+    }
+
+    function selectPayMethod(method) {
+      checkoutData.paymentMethod = method;
+      renderCheckoutStep(2);
+    }
+
+    function generateInvoice() {
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      checkoutData.invoiceId = `INV-OBS-${rand}`;
+      renderCheckoutStep(3);
+    }
+
+    function confirmOrderToWhatsApp() {
+      const summary = getCartSummary();
+      const itemLines = summary.detailedItems
+        .map((it, idx) => `${idx + 1}. ${it.name} (${it.qty}x) = ${formatRupiah(it.lineTotal)}`)
+        .join("\n");
+
+      const payLabel = checkoutData.paymentMethod === "qris"
+        ? "QRIS Instan"
+        : STORE_CONFIG.bankAccounts[checkoutData.bankCode].label;
+
+      let message =
+        `Halo *${STORE_CONFIG.brandName}*, saya telah melakukan pemesanan:\n\n` +
+        `*No. Invoice:* ${checkoutData.invoiceId}\n` +
+        `*Nama:* ${checkoutData.name}\n` +
+        `*Email:* ${checkoutData.email}\n` +
+        `*Metode Bayar:* ${payLabel}\n\n` +
+        `*Rincian Pesanan:*\n${itemLines}\n\n` +
+        `*Subtotal:* ${formatRupiah(summary.subtotal)}\n` +
+        (summary.discount > 0 ? `*Diskon Promo:* -${formatRupiah(summary.discount)}\n` : "") +
+        `*Ongkos Kirim:* ${formatRupiah(summary.shipping)}\n` +
+        `*TOTAL BAYAR:* *${formatRupiah(summary.total)}*\n`;
+
+      if (summary.hasPhysical) {
+        message += `\n*Kurir:* ${checkoutData.courier}\n*Alamat Kirim:* ${checkoutData.address}\n`;
+      }
+
+      message += `\nBerikut saya lampirkan bukti pembayarannya. Terima kasih!`;
+
+      // Kosongkan keranjang setelah checkout diteruskan ke WA
+      cart = [];
+      appliedPromo = false;
+      saveCart();
+      closeCheckoutModal();
+
+      window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+
+    // =========================================================================
+    // 8. INISIALISASI HALAMAN
+    // =========================================================================
+    document.getElementById("nav-brand-name").textContent = STORE_CONFIG.brandName;
+    document.getElementById("top-promo-code").textContent = STORE_CONFIG.promoCode;
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
