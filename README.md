@@ -1,2 +1,0 @@
-# ObsidianPro
-Market Digital
